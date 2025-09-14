@@ -1,0 +1,415 @@
+/* 火灾预警系统样式 */
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: alertShow 0.3s ease-out;
+}
+
+.alert-overlay.emergency {
+  background: linear-gradient(45deg, 
+    rgba(220, 38, 38, 0.3) 0%, 
+    rgba(239, 68, 68, 0.4) 25%,
+    rgba(220, 38, 38, 0.3) 50%,
+    rgba(239, 68, 68, 0.4) 75%,
+    rgba(220, 38, 38, 0.3) 100%);
+  background-size: 400% 400%;
+  animation: alertShow 0.3s ease-out, emergencyGradient 2s ease-in-out infinite;
+}
+
+.alert-overlay.blink {
+  animation: alertBlink 0.5s ease-in-out;
+}
+
+.alert-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 3px solid var(--danger-color);
+  animation: alertPulse 2s ease-in-out infinite;
+}
+
+.alert-container.emergency {
+  border-color: #ff0000;
+  box-shadow: 
+    0 25px 50px rgba(255, 0, 0, 0.3),
+    0 0 50px rgba(255, 0, 0, 0.2),
+    inset 0 0 20px rgba(255, 0, 0, 0.1);
+}
+
+/* 警报头部 */
+.alert-header {
+  background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+  color: white;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.alert-icon {
+  font-size: 4rem;
+  animation: iconBounce 1s ease-in-out infinite;
+}
+
+.alert-title-section {
+  flex: 1;
+}
+
+.alert-title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: titleGlow 2s ease-in-out infinite;
+}
+
+.alert-timestamp {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-family: 'Monaco', 'Menlo', monospace;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.alert-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.alert-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* 警报内容 */
+.alert-content {
+  padding: 2rem;
+}
+
+.alert-message {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fca5a5;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1);
+}
+
+.alert-message p {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 火灾位置信息 */
+.fire-location {
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+  border: 2px solid #fb923c;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.fire-location h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.location-details {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.location-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.location-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.location-value {
+  font-weight: 700;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.location-value.threat-high {
+  color: var(--danger-color);
+  animation: threatBlink 1s ease-in-out infinite;
+}
+
+/* 应急处理按钮 */
+.emergency-actions {
+  background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%);
+  border: 2px solid #60a5fa;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.emergency-actions h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: center;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.action-btn {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn.danger {
+  background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+  color: white;
+}
+
+.action-btn.warning {
+  background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+  color: white;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+  color: white;
+}
+
+.action-btn.secondary {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 确认按钮 */
+.alert-footer {
+  text-align: center;
+}
+
+.acknowledge-btn {
+  background: linear-gradient(135deg, var(--success-color) 0%, #16a34a 100%);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.3);
+}
+
+.acknowledge-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+}
+
+/* 背景粒子效果 */
+.alert-background-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fire-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff6b35;
+  border-radius: 50%;
+  animation: fireFloat 3s ease-in-out infinite;
+}
+
+.fire-particle:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 2.5s;
+}
+
+.fire-particle:nth-child(2) {
+  left: 25%;
+  animation-delay: 0.5s;
+  animation-duration: 3s;
+}
+
+.fire-particle:nth-child(3) {
+  left: 50%;
+  animation-delay: 1s;
+  animation-duration: 2s;
+}
+
+.fire-particle:nth-child(4) {
+  left: 75%;
+  animation-delay: 1.5s;
+  animation-duration: 3.5s;
+}
+
+.fire-particle:nth-child(5) {
+  left: 90%;
+  animation-delay: 2s;
+  animation-duration: 2.8s;
+}
+
+/* 动画效果 */
+@keyframes alertShow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes alertBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes alertPulse {
+  0%, 100% { 
+    box-shadow: 0 25px 50px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.2);
+  }
+  50% { 
+    box-shadow: 0 25px 50px rgba(255, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.4);
+  }
+}
+
+@keyframes emergencyGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes iconBounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+  50% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5); }
+}
+
+@keyframes threatBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes fireFloat {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .alert-container {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .alert-header {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .alert-icon {
+    font-size: 3rem;
+  }
+  
+  .alert-title {
+    font-size: 1.5rem;
+  }
+  
+  .alert-content {
+    padding: 1.5rem;
+  }
+  
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .location-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

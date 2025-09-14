@@ -1,0 +1,615 @@
+/* 控制面板样式 */
+.control-panel {
+  background: var(--surface);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.control-panel.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  border-radius: 0;
+  height: 100vh;
+  max-width: none;
+  padding: 2rem;
+}
+
+/* 控制面板头部 */
+.control-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+}
+
+.status-indicator.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.status-indicator.primary {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.status-indicator.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+.status-indicator.danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: statusPulse 2s infinite;
+}
+
+.emergency-indicator {
+  background: var(--danger-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  animation: emergencyBlink 0.5s infinite alternate;
+}
+
+/* 控制面板内容 */
+.control-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+/* 主要控制按钮 */
+.main-controls {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.control-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.control-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-height: 60px;
+}
+
+.control-button.success {
+  background: linear-gradient(135deg, var(--success-color) 0%, #16a34a 100%);
+  color: white;
+}
+
+.control-button.warning {
+  background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+  color: white;
+}
+
+.control-button.primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+  color: white;
+}
+
+.control-button.danger {
+  background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+  color: white;
+}
+
+.control-button:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.control-button.disabled {
+  background: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.button-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 飞行参数设置 */
+.flight-parameters {
+  background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+  border: 1px solid #fcd34d;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.parameter-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.parameter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.parameter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.parameter-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.parameter-slider {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: #d1d5db;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.parameter-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.parameter-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.parameter-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'Monaco', 'Menlo', monospace;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* 飞行模式选择 */
+.flight-modes {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #86efac;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.mode-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.mode-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid transparent;
+  background: white;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mode-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.mode-button.active {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+  color: white;
+}
+
+.mode-icon {
+  font-size: 1.5rem;
+}
+
+.mode-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* 实时状态信息 */
+.status-info {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+  border: 1px solid #f9a8d4;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.status-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.status-item {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.status-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.status-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 电池指示器 */
+.battery-indicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.battery-bar {
+  flex: 1;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #d1d5db;
+}
+
+.battery-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: inherit;
+}
+
+.battery-fill.success {
+  background: linear-gradient(90deg, var(--success-color) 0%, #16a34a 100%);
+}
+
+.battery-fill.warning {
+  background: linear-gradient(90deg, var(--warning-color) 0%, #d97706 100%);
+}
+
+.battery-fill.danger {
+  background: linear-gradient(90deg, var(--danger-color) 0%, #dc2626 100%);
+}
+
+.battery-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* GPS信号指示器 */
+.signal-indicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.signal-bars {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  height: 20px;
+}
+
+.signal-bar {
+  width: 6px;
+  background: #e5e7eb;
+  transition: background 0.3s ease;
+}
+
+.signal-bar:nth-child(1) { height: 20%; }
+.signal-bar:nth-child(2) { height: 40%; }
+.signal-bar:nth-child(3) { height: 60%; }
+.signal-bar:nth-child(4) { height: 80%; }
+.signal-bar:nth-child(5) { height: 100%; }
+
+.signal-bar.active {
+  background: var(--success-color);
+}
+
+.signal-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 坐标显示 */
+.coordinate-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.coordinate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coord-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.coord-value {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 环境数据 */
+.environment-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.env-item {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* 最近命令 */
+.last-command {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.command-status {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.command-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.command-action {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.command-time {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+.command-indicator {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.command-indicator.executing {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+}
+
+.command-indicator.completed {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+/* 动画效果 */
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes emergencyBlink {
+  0% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .control-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mode-selector {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .control-content {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .control-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .status-display {
+    justify-content: center;
+  }
+  
+  .control-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .mode-selector {
+    grid-template-columns: 1fr;
+  }
+  
+  .battery-indicator,
+  .signal-indicator {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .command-status {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+/* 滚动条样式 */
+.control-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.control-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.control-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.control-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
